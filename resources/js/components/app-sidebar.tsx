@@ -44,7 +44,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Experience',
-        href: '/experience',
+        href: '/experiences',
         icon: Sparkles
     },
     {
