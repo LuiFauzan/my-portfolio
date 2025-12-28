@@ -13,7 +13,7 @@ import {
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { AppWindow, Bolt, BookOpen, Folder, Images, LayoutGrid, ShieldCheck, Sparkles, UserRoundSearch } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -22,6 +22,41 @@ const mainNavItems: NavItem[] = [
         href: dashboard(),
         icon: LayoutGrid,
     },
+    {
+        title: 'Project',
+        href: '/projects',
+        icon: AppWindow
+    },
+    {
+        title: 'Project Image',
+        href: '/project-images',
+        icon: Images
+    },
+    {
+        title: 'Skill',
+        href: '/skills',
+        icon: Bolt
+    },
+    {
+        title: 'Skill Image',
+        href: '/skill-images',
+        icon: Images
+    },
+    {
+        title: 'Experience',
+        href: '/experience',
+        icon: Sparkles
+    },
+    {
+        title: 'Social',
+        href: '/socials',
+        icon: UserRoundSearch
+    },
+    {
+        title: 'Testimonial',
+        href: '/testimonials',
+        icon: ShieldCheck
+    }
 ];
 
 const footerNavItems: NavItem[] = [
