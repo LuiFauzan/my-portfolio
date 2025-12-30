@@ -1,4 +1,7 @@
 import AdminLayout from '@/components/layout/AdminLayout';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+
 import { Button } from '@/components/ui/button';
 import {
     Table,
@@ -11,7 +14,20 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
-import { CopyX, Download, PenBoxIcon, PlusCircle, Trash2 } from 'lucide-react';
+import {
+
+    CheckCircle,
+    CopyX,
+    Download,
+    Github,
+    Megaphone,
+    PenBoxIcon,
+    PlusCircle,
+    SquareArrowOutUpRight,
+    Trash2,
+    XCircle,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Project',
@@ -33,18 +49,28 @@ interface Projects {
     is_featured: boolean;
 }
 interface ProjectsIndexProps {
-    flash?: {
-        message: string;
+    flash: {
+        message?: string;
     };
     projects: Projects[];
 }
 export default function ProjectIndex() {
     const { flash, projects } = usePage().props as ProjectsIndexProps;
-    const {delete:destroy , } = useForm();
+    const [showFlash, setShowFlash] = useState(!!flash?.message);
+    useEffect(() => {
+        if (flash.message) {
+            setShowFlash(true);
+            const timer = setTimeout(() => {
+                setShowFlash(false);
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [flash.message]);
+    const { delete: destroy } = useForm();
 
-    const handleDeleteProject = ( id:number) => {
-        destroy('/projects/' + id)
-    }
+    const handleDeleteProject = (id: number) => {
+        destroy('/projects/' + id);
+    };
     return (
         <>
             <AppLayout breadcrumbs={breadcrumbs}>
@@ -59,6 +85,18 @@ export default function ProjectIndex() {
                                 <p className="text-gray-500">
                                     List of your projects
                                 </p>
+                            </div>
+                            <div className="absolute top-20 left-5/12 z-auto">
+                                {/* Display Message Success */}
+                                {showFlash && flash.message && (
+                                    <Alert className="w-fit border-green-400 text-green-600 shadow-md">
+                                        <Megaphone />
+                                        <AlertTitle>Notifications</AlertTitle>
+                                        <AlertDescription className="text-green-500">
+                                            {flash.message}
+                                        </AlertDescription>
+                                    </Alert>
+                                )}
                             </div>
                             <div className="flex gap-2">
                                 <Button variant={'outline'}>
@@ -112,30 +150,75 @@ export default function ProjectIndex() {
                                                 {project.role}
                                             </TableCell>
                                             <TableCell>
+                                                <Badge>
+
                                                 {project.tech_stack}
+                                                </Badge>
                                             </TableCell>
                                             <TableCell>
-                                                <img src={`/storage/${project.thumbnail}`} width={50} alt="" />
+                                                <img
+                                                    src={`/storage/${project.thumbnail}`}
+                                                    width={50}
+                                                    alt=""
+                                                />
                                             </TableCell>
                                             <TableCell>
-                                                {project.demo_url}
+                                               <Link href={`${project.repo_url}`}>
+                                                    <Button>
+                                                        <SquareArrowOutUpRight/>
+                                                        Demo App
+                                                    </Button>
+                                                </Link>
                                             </TableCell>
                                             <TableCell>
-                                                {project.repo_url}
+                                                <Link href={`${project.repo_url}`}>
+                                                    <Button>
+                                                        <Github/>
+                                                        Github
+                                                    </Button>
+                                                </Link>
                                             </TableCell>
                                             <TableCell>
                                                 {project.type}
                                             </TableCell>
-                                            <TableCell>
-                                                {project.is_featured}
+                                            <TableCell className='text-center  '>
+
+                                                {project.is_featured ? (
+                                                    <span className='text-green-500'>
+
+                                                    <CheckCircle />
+                                                    </span>
+                                                ) : (
+                                                    <span className='text-red-500'>
+
+                                                    <XCircle />
+                                                    </span>
+                                                )}
                                             </TableCell>
                                             <TableCell>
-                                                <Button variant={'outline'}>
-                                                    <PenBoxIcon />
-                                                </Button>
-                                                <Button variant={'destructive'} onClick={() => handleDeleteProject(project.id)}>
-                                                    <Trash2 />
-                                                </Button>
+                                                <div className="flex gap-2">
+                                                    <Link
+                                                        href={`/projects/${project.id}/edit`}
+                                                    >
+                                                        <Button
+                                                            variant={
+                                                                'blueyungkai'
+                                                            }
+                                                        >
+                                                            <PenBoxIcon />
+                                                        </Button>
+                                                    </Link>
+                                                    <Button
+                                                        variant={'destructive'}
+                                                        onClick={() =>
+                                                            handleDeleteProject(
+                                                                project.id,
+                                                            )
+                                                        }
+                                                    >
+                                                        <Trash2 />
+                                                    </Button>
+                                                </div>
                                             </TableCell>
                                         </TableRow>
                                     ))}
