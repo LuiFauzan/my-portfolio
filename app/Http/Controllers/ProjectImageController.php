@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\ProjectImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -10,14 +11,23 @@ use Inertia\Inertia;
 class ProjectImageController extends Controller
 {
     public function index() {
-        return Inertia::render('Admin/ProjectImages/Index',[]);
+        $projectImages = ProjectImage::with('project')->get();
+        return Inertia::render('Admin/ProjectImages/Index',[
+            'projectImages' => $projectImages
+        ]);
     }
-    public function create(){
-        return Inertia::render('Admin/ProjectImages/Create');
+    public function create(Request $request){
+         $projectId = $request->query('project_id');
+
+    $project = Project::findOrFail($projectId);
+
+    return Inertia::render('Admin/ProjectImages/Create', [
+        'project' => $project, //? Send all object or min id + title
+    ]);
     }
     public function store(Request $request){
         $validated = $request->validate([
-            'project_id' => 'required|exists:project,project_id',
+            'project_id' => 'required|exists:projects,id',
             'image' => 'required|image|mimes:png,jpg,jpeg,svg,gif|max:2048'
         ]);
 
@@ -36,10 +46,11 @@ class ProjectImageController extends Controller
     }
     public function update(Request $request, ProjectImage $projectImage){
          $validated = $request->validate([
-            'project_id' => 'required|exists:project,id',
+            'project_id' => 'required|exists:projects,id',
             'image' => 'nullable|image|mimes:png,jpg,jpeg,svg,gif|max:2048'
         ]);
 
+        unset($validated['image']);
         // ? (opsional) update new image
         if ($request->hasFile('image')){
             // ? if true delete old image from storage
@@ -57,6 +68,6 @@ class ProjectImageController extends Controller
                 Storage::disk('public')->delete($projectImage->image);
             }
         $projectImage->delete();
-        return redirect()->route('project-images.create')->with('message','Image Deleted Successfully');
+        return redirect()->route('project-images.index')->with('message','Image Deleted Successfully');
     }
 }

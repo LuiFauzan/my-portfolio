@@ -167,21 +167,27 @@ export default function ProjectIndex() {
                                                     )}
                                                 </div>
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell className='flex gap-2'>
                                                 <Dialog>
                                                     <DialogTrigger asChild>
                                                         <Button>
-                                                            <ImageUpscale/>
+                                                            <ImageUpscale />
                                                             Preview
-                                                            </Button>
+                                                        </Button>
                                                     </DialogTrigger>
-                                                    <DialogContent className='p-2'>
+                                                    <DialogContent className="p-2">
                                                         <img
                                                             src={`/storage/${project.thumbnail}`}
                                                             alt=""
                                                         />
                                                     </DialogContent>
                                                 </Dialog>
+                                                <Link href={`/project-images/create?project_id=${project.id}`}>
+                                                <Button>
+                                                    <PlusCircle />
+                                                    Add Image
+                                                </Button>
+                                                </Link>
                                             </TableCell>
                                             <TableCell>
                                                 <Link
