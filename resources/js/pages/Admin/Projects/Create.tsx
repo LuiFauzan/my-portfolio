@@ -21,7 +21,7 @@ import { useState } from 'react';
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'All Project',
-        href: '/projects/create',
+        href: '/projects',
     },
     {
         title: 'Create Project',
@@ -104,29 +104,36 @@ export default function ProjectCreate() {
                                         type="text"
                                         placeholder="Input Title"
                                         value={data.title}
-                                         onChange={(e) => {
-                                                const title = e.target.value;
+                                        onChange={(e) => {
+                                            const title = e.target.value;
 
-                                                setData({
-                                                    ...data,
-                                                    title,
-                                                    slug: slugify(title),
-                                                });
-                                            }}
+                                            setData({
+                                                ...data,
+                                                title,
+                                                slug: slugify(title),
+                                            });
+                                        }}
                                     />
-                                     {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
-                                     {errors.thumbnail && <p className="text-sm text-red-500">{errors.thumbnail}</p>}
+                                    {errors.title && (
+                                        <p className="text-sm text-red-500">
+                                            {errors.title}
+                                        </p>
+                                    )}
                                 </Label>
                                 <Label className="flex flex-col gap-2">
                                     Slug
                                     <Input
                                         type="text"
-                                        placeholder="Automatic"
+                                        placeholder="Automatic when you type title"
                                         value={data.slug}
                                         readOnly
                                     />
                                 </Label>
-
+                                {errors.slug && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.slug}
+                                    </p>
+                                )}
                                 <Label className="flex flex-col gap-2">
                                     Role
                                     <Input
@@ -138,6 +145,11 @@ export default function ProjectCreate() {
                                         }
                                     />
                                 </Label>
+                                {errors.role && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.role}
+                                    </p>
+                                )}
                                 <Label className="flex flex-col gap-2">
                                     Tech Stack
                                     <Input
@@ -154,6 +166,11 @@ export default function ProjectCreate() {
                                         }
                                     />
                                 </Label>
+                                {errors.tech_stack && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.tech_stack}
+                                    </p>
+                                )}
                                 <Label className="flex flex-col gap-2">
                                     Demo URL
                                     <Input
@@ -165,6 +182,11 @@ export default function ProjectCreate() {
                                         }
                                     />
                                 </Label>
+                                {errors.demo_url && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.demo_url}
+                                    </p>
+                                )}
                                 <Label className="flex flex-col gap-2">
                                     Repository URL
                                     <Input
@@ -176,6 +198,11 @@ export default function ProjectCreate() {
                                         }
                                     />
                                 </Label>
+                                {errors.repo_url && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.repo_url}
+                                    </p>
+                                )}
                                 <Label className="flex flex-col gap-2">
                                     Type
                                     <Select
@@ -205,7 +232,11 @@ export default function ProjectCreate() {
                                         </SelectContent>
                                     </Select>
                                 </Label>
-
+                                {errors.type && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.type}
+                                    </p>
+                                )}
                                 <Label className="mt-5 flex h-fit items-center gap-3 rounded-lg border p-2.5 hover:bg-accent/50 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950">
                                     <Checkbox
                                         checked={data.is_featured}
@@ -222,7 +253,11 @@ export default function ProjectCreate() {
                                         Enable is Featured
                                     </p>
                                 </Label>
-
+                                {errors.is_featured && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.is_featured}
+                                    </p>
+                                )}
                                 <Label className="col-span-2 flex flex-col gap-2">
                                     Description
                                     <Textarea
@@ -236,6 +271,11 @@ export default function ProjectCreate() {
                                         }
                                     ></Textarea>
                                 </Label>
+                                {errors.description && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.description}
+                                    </p>
+                                )}
                                 <Label className="col-span-2 flex flex-col gap-2">
                                     Image
                                     <Input
@@ -254,17 +294,25 @@ export default function ProjectCreate() {
                                         }}
                                     />
                                 </Label>
+                                {errors.thumbnail && (
+                                    <p className="text-sm text-red-500">
+                                        {errors.thumbnail}
+                                    </p>
+                                )}
                                 <Button className="mt-5" type="submit">
                                     Save New Project
                                 </Button>
                             </div>
                         </div>
-                        {preview && (
-                            <img
-                                src={preview}
-                                className="mt-4 h-40 w-40 rounded-lg object-cover"
-                            />
-                        )}
+                        <div className="flex mt-5 items-center gap-4">
+                            {preview && (
+                                <img
+                                    src={preview}
+                                    className="h-32 w-32 rounded-lg border object-cover"
+                                />
+                            )}
+
+                        </div>
                     </form>
                 </AdminLayout>
             </AppLayout>

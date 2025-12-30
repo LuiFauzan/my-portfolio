@@ -60,8 +60,14 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
     const [preview, setPreview] = useState<string | null>(
         project.thumbnail ? `/storage/${project.thumbnail}` : null,
     );
-    const { data: dataUpdate, setData: setDataUpdate, post, processing, errors } = useForm({
-        _method:'put',
+    const {
+        data: dataUpdate,
+        setData: setDataUpdate,
+        post,
+        processing,
+        errors,
+    } = useForm({
+        _method: 'put',
         title: project.title,
         slug: project.slug,
         description: project.description,
@@ -75,13 +81,12 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
     });
 
     const handleUpdateProject = (e: React.FormEvent) => {
-    e.preventDefault();
+        e.preventDefault();
 
-    post(`/projects/${project.id}`, {
-
-        forceFormData: true,
-    });
-};
+        post(`/projects/${project.id}`, {
+            forceFormData: true,
+        });
+    };
 
     return (
         <>
@@ -117,7 +122,10 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
                                         onChange={(e) => {
                                             const title = e.target.value;
                                             setDataUpdate('title', title);
-                                            setDataUpdate('slug', slugify(title));
+                                            setDataUpdate(
+                                                'slug',
+                                                slugify(title),
+                                            );
                                         }}
                                     />
                                     {/* {errors.title && (
@@ -149,7 +157,10 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
                                         placeholder="Frontend, Backend, Ui/Ux Designer etc."
                                         value={dataUpdate.role}
                                         onChange={(e) =>
-                                            setDataUpdate('role', e.target.value)
+                                            setDataUpdate(
+                                                'role',
+                                                e.target.value,
+                                            )
                                         }
                                     />
                                 </Label>
@@ -158,7 +169,10 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
                                     <Input
                                         type="text"
                                         placeholder="React, Laravel, PHP, Javascript etc."
-                                        value={dataUpdate.tech_stack?.join(',') ?? ''}
+                                        value={
+                                            dataUpdate.tech_stack?.join(',') ??
+                                            ''
+                                        }
                                         onChange={(e) =>
                                             setDataUpdate(
                                                 'tech_stack',
@@ -176,7 +190,10 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
                                         placeholder="https://demourl/"
                                         value={dataUpdate.demo_url}
                                         onChange={(e) =>
-                                            setDataUpdate('demo_url', e.target.value)
+                                            setDataUpdate(
+                                                'demo_url',
+                                                e.target.value,
+                                            )
                                         }
                                     />
                                 </Label>
@@ -187,7 +204,10 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
                                         placeholder="https://repositoryurl/"
                                         value={dataUpdate.repo_url}
                                         onChange={(e) =>
-                                            setDataUpdate('repo_url', e.target.value)
+                                            setDataUpdate(
+                                                'repo_url',
+                                                e.target.value,
+                                            )
                                         }
                                     />
                                 </Label>
@@ -276,12 +296,14 @@ export default function ProjectEdit({ project }: ProjectsIndexProps) {
                                 </Button>
                             </div>
                         </div>
-                        {preview && (
-                            <img
-                                src={preview}
-                                className="mt-4 h-40 w-40 rounded-lg object-cover"
-                            />
-                        )}
+                        <div className="flex items-center gap-4">
+                            {preview && (
+                                <img
+                                    src={preview}
+                                    className="h-32 w-32 rounded-lg border object-cover"
+                                />
+                            )}
+                        </div>
                     </form>
                 </AdminLayout>
             </AppLayout>

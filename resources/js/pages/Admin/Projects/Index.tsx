@@ -3,6 +3,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 import {
     Table,
     TableBody,
@@ -14,12 +15,13 @@ import {
 import AppLayout from '@/layouts/app-layout';
 import { BreadcrumbItem } from '@/types';
 import { Head, Link, useForm, usePage } from '@inertiajs/react';
+import { DialogTrigger } from '@radix-ui/react-dialog';
 import {
-
     CheckCircle,
     CopyX,
     Download,
     Github,
+    ImageUpscale,
     Megaphone,
     PenBoxIcon,
     PlusCircle,
@@ -119,7 +121,7 @@ export default function ProjectIndex() {
                                             #
                                         </TableHead>
                                         <TableHead>Title</TableHead>
-                                        <TableHead>Slug</TableHead>
+                                        {/* <TableHead>Slug</TableHead> */}
                                         <TableHead>Description</TableHead>
                                         <TableHead>Role</TableHead>
                                         <TableHead>Tech Stack</TableHead>
@@ -127,7 +129,9 @@ export default function ProjectIndex() {
                                         <TableHead>Demo URL</TableHead>
                                         <TableHead>Repo URL</TableHead>
                                         <TableHead>Type</TableHead>
-                                        <TableHead>Is Featured</TableHead>
+                                        <TableHead className="flex items-center justify-center">
+                                            Is Featured
+                                        </TableHead>
                                         <TableHead>Action</TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -140,9 +144,9 @@ export default function ProjectIndex() {
                                             <TableCell>
                                                 {project.title}
                                             </TableCell>
-                                            <TableCell>
+                                            {/* <TableCell>
                                                 {project.slug}
-                                            </TableCell>
+                                            </TableCell> */}
                                             <TableCell>
                                                 {project.description}
                                             </TableCell>
@@ -150,30 +154,51 @@ export default function ProjectIndex() {
                                                 {project.role}
                                             </TableCell>
                                             <TableCell>
-                                                <Badge>
-
-                                                {project.tech_stack}
-                                                </Badge>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {project.tech_stack?.map(
+                                                        (tech, index) => (
+                                                            <Badge
+                                                                key={index}
+                                                                // variant="default"
+                                                            >
+                                                                {tech}
+                                                            </Badge>
+                                                        ),
+                                                    )}
+                                                </div>
                                             </TableCell>
                                             <TableCell>
-                                                <img
-                                                    src={`/storage/${project.thumbnail}`}
-                                                    width={50}
-                                                    alt=""
-                                                />
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <Button>
+                                                            <ImageUpscale/>
+                                                            Preview
+                                                            </Button>
+                                                    </DialogTrigger>
+                                                    <DialogContent className='p-2'>
+                                                        <img
+                                                            src={`/storage/${project.thumbnail}`}
+                                                            alt=""
+                                                        />
+                                                    </DialogContent>
+                                                </Dialog>
                                             </TableCell>
                                             <TableCell>
-                                               <Link href={`${project.repo_url}`}>
+                                                <Link
+                                                    href={`${project.repo_url}`}
+                                                >
                                                     <Button>
-                                                        <SquareArrowOutUpRight/>
+                                                        <SquareArrowOutUpRight />
                                                         Demo App
                                                     </Button>
                                                 </Link>
                                             </TableCell>
                                             <TableCell>
-                                                <Link href={`${project.repo_url}`}>
+                                                <Link
+                                                    href={`${project.repo_url}`}
+                                                >
                                                     <Button>
-                                                        <Github/>
+                                                        <Github />
                                                         Github
                                                     </Button>
                                                 </Link>
@@ -181,19 +206,18 @@ export default function ProjectIndex() {
                                             <TableCell>
                                                 {project.type}
                                             </TableCell>
-                                            <TableCell className='text-center  '>
-
-                                                {project.is_featured ? (
-                                                    <span className='text-green-500'>
-
-                                                    <CheckCircle />
-                                                    </span>
-                                                ) : (
-                                                    <span className='text-red-500'>
-
-                                                    <XCircle />
-                                                    </span>
-                                                )}
+                                            <TableCell className="text-center">
+                                                <div className="flex justify-center">
+                                                    {project.is_featured ? (
+                                                        <span className="text-green-500">
+                                                            <CheckCircle />
+                                                        </span>
+                                                    ) : (
+                                                        <span className="text-red-500">
+                                                            <XCircle />
+                                                        </span>
+                                                    )}
+                                                </div>
                                             </TableCell>
                                             <TableCell>
                                                 <div className="flex gap-2">

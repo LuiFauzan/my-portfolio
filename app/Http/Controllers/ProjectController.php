@@ -76,11 +76,11 @@ class ProjectController extends Controller
         ]);
 
         $validated['is_featured'] = $request->boolean('is_featured');
+        unset($validated['thumbnail']);
         if ($request->hasFile('thumbnail')) {
-            if ($project->thumbnail) {
+            if ($project->thumbnail && Storage::disk('public')->exists($project->thumbnail)) {
                 Storage::disk('public')->delete($project->thumbnail);
             }
-
             $validated['thumbnail'] = $request->file('thumbnail')->store('thumbnail-images', 'public');
         }
         // $validated['title'] = $request->string('title');
