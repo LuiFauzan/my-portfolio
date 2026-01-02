@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('platform'); // GitHub, LinkedIn
             $table->string('url');
             $table->string('icon')->nullable();
+            $table->timestamps();
         });
     }
 

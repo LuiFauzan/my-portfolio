@@ -46,7 +46,7 @@ export default function ExperienceIndex({flash, experiences} : ExperienceIndexPr
                         <div className="flex flex-row items-center justify-between">
                             <div>
                                 <h1 className="text-3xl font-extrabold">
-                                    Experiences
+                                    EXPERIENCES
                                 </h1>
                                 <p className="text-gray-500">
                                     List of your experiences

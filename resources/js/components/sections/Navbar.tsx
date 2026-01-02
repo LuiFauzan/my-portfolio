@@ -14,7 +14,7 @@ export default function Navbar() {
                         alt=""
                     />
                 </div>
-                
+
                 {/*Bar Desktop Mode */}
                 <div className="hidden lg:block"></div>
                 {/* Bar Mobile Mode */}
@@ -30,7 +30,7 @@ export default function Navbar() {
                 </button>
                 {/* Mobile Menu */}
                 {open && (
-                    <div className="absolute  top-14 right-[6.5 px] flex w-[359px] flex-row p-2 gap-1 rounded-md border lg:hidden z-50">
+                    <div className="absolute bg-black shadow-white top-14 right-[6.5 px] flex w-[359px] flex-row p-2 gap-1 rounded-md shadow-xs lg:hidden z-50">
                         <div className='flex flex-col'>
                             <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">About</a>
                             <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">Project</a>

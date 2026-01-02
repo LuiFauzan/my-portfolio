@@ -11,7 +11,9 @@ class SocialController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/Socials/Index', []);
+        return Inertia::render('Admin/Socials/Index', [
+            'socials' => Social::all()
+        ]);
     }
 
     public function create()

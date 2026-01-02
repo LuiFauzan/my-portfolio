@@ -10,7 +10,9 @@ use Inertia\Inertia;
 class TestimonialController extends Controller
 {
     public function index(){
-        return Inertia::render('Admin/Testimonials/Index',[]);
+        return Inertia::render('Admin/Testimonials/Index',[
+            'testimonials' => Testimonial::all()
+        ]);
     }
     public function create(){
         return Inertia::render('Admin/Testimonials/Create',[]);
