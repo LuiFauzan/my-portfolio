@@ -12,6 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('experiences', function (Blueprint $table) {
+
+             $table->id();        // Frontend Developer
              $table->string('title');        // Frontend Developer
             $table->string('company')->nullable();
             $table->enum('type', ['Freelance', 'Internship', 'Organization']);

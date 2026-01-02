@@ -48,7 +48,7 @@ export default function ProjectImageIndex({
                     <div className="flex flex-col gap-2">
                         <div className="flex flex-row items-center justify-between">
                             <div>
-                                <h1 className="text-3xl font-extrabold">
+                                <h1 className="text-3xl uppercase font-extrabold">
                                     Project Images
                                 </h1>
                                 <p className="text-gray-500">

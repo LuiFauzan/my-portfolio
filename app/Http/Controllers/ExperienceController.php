@@ -10,7 +10,9 @@ use Inertia\Inertia;
 class ExperienceController extends Controller
 {
     public function index(){
-        return Inertia::render('Admin/Experiences/Index',[]);
+        return Inertia::render('Admin/Experiences/Index',[
+            'experiences' => Experience::all()
+        ]);
     }
 
     public function create(){
@@ -21,7 +23,7 @@ class ExperienceController extends Controller
         $validated = $request->validate([
             'title' => 'required|max:255|string',
             'company' => 'nullable|max:255',
-            'type' => 'required|in:Freelance,Intership,Organization',
+            'type' => 'required|in:Freelance,Internship,Organization',
             'start_date' => 'nullable|date',
             'end_date' => 'nullable|date',
             'description' => 'nullable'

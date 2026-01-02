@@ -82,7 +82,7 @@ export default function ProjectIndex() {
                         <div className="flex flex-row items-center justify-between">
                             <div>
                                 <h1 className="text-3xl font-extrabold">
-                                    Projects
+                                    PROJECTS
                                 </h1>
                                 <p className="text-gray-500">
                                     List of your projects
@@ -242,7 +242,7 @@ export default function ProjectIndex() {
                                                         variant={'destructive'}
                                                         onClick={() =>
                                                             handleDeleteProject(
-                                                                project.id,
+                                                                project.id
                                                             )
                                                         }
                                                     >

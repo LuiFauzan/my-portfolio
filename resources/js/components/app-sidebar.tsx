@@ -37,11 +37,11 @@ const mainNavItems: NavItem[] = [
         href: '/skills',
         icon: Bolt
     },
-    {
-        title: 'Skill Image',
-        href: '/skill-images',
-        icon: Images
-    },
+    // {
+    //     title: 'Skill Image',
+    //     href: '/skill-images',
+    //     icon: Images
+    // },
     {
         title: 'Experience',
         href: '/experiences',

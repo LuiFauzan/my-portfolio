@@ -11,7 +11,10 @@ class SkillController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Admin/Skills/Index');
+
+        return Inertia::render('Admin/Skills/Index', [
+            'skills' => Skill::all()
+        ]);
     }
     public function create()
     {
@@ -23,7 +26,7 @@ class SkillController extends Controller
             'name' => 'required|max:255',
             'category' => 'required|in:backend,frontend,design,video',
             'level' => 'required|in:Beginner,Intermediate,Advanced',
-            'icon' => 'required|image|mimes:png,jpg,svg,gif|max:2048'
+            'icon' => 'required|mimes:png,jpg,svg,gif|max:2048'
         ]);
 
         $iconPath = $request->file('icon')->store('skill-icons', 'public');
@@ -49,6 +52,7 @@ class SkillController extends Controller
             'level' => 'required',
             'icon' => 'nullable|image|mimes:png,jpg,svg,gif|max:2048'
         ]);
+        unset($validated['icon']);
 
         if ($request->hasFile('icon')) {
             if ($skill->icon && Storage::disk('public')->exists($skill->icon)) {
