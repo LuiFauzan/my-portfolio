@@ -101,9 +101,9 @@ export default function Hero() {
                     </p>
 
                     {/* ICONS */}
-                    <div ref={iconsRef} className="z-50">
+                    <div ref={iconsRef} className="z-10">
                         <Link href={'#contact'}>
-                        <Button className=" text-black font-extrabold" variant={'outline'}>Become Partner</Button>
+                        <Button className=" text-black hover:bg-white/80 font-extrabold" variant={'outline'}>Become a Partner</Button>
                         </Link>
                     </div>
                 </div>

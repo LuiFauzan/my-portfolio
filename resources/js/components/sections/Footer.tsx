@@ -9,7 +9,7 @@ export default function Footer() {
 
                     {/* LEFT */}
                     <p className="text-sm text-gray-400">
-                        © {new Date().getFullYear()} Lui Fauzan. All rights reserved.
+                        © {new Date().getFullYear()} <a href="#" className='hover:underline'> Lui Fauzan</a>. All rights reserved.
                     </p>
 
                     {/* CENTER */}
@@ -47,7 +47,7 @@ export default function Footer() {
                             target="_blank"
                             className="hover:text-white transition"
                         >
-                            <Github/>z
+                            <Github/>
                         </a>
                         <a
                             href="https://instagram.com/lui.fauzan"

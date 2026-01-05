@@ -1,121 +1,92 @@
-import { PanelTopOpen } from 'lucide-react';
-import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+const navItems = [
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Experience', href: '#experiences' },
+    { label: 'Contact', href: '#contact' },
+];
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
-        <nav className="fixed z-50 w-full rounded-md p-2 px-10 pt-4 md:px-39 md:pt-5 lg:w-full lg:px-64 lg:pt-7">
-            <div className="flex items-center justify-between lg:py-2">
-                <div className="">
-                    <a href="#">
-                        <img
-                            src="assets/img/lf-logo-putih.svg"
-                            className={`w-[40px] transition-transform duration-300 ${open ? 'rotate-90' : 'rotate-0'}`}
-                            alt=""
-                        />
-                    </a>
+        <nav className="fixed top-6 z-50 w-full px-4 ">
+            <div
+                className={`mx-auto flex max-w-[1430px] items-center border-0  justify-between rounded-2xl px-6 py-4 transition-all duration-500 ${
+                    scrolled
+                        ? `border border-white/10 bg-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.35)] backdrop-blur-xl`
+                        : `bg-transparent`
+                } `}
+            >
+                {/* LOGO */}
+                <a href="#" className="flex items-center gap-2">
+                    <img
+                        src="/assets/img/lf-logo-putih.svg"
+                        alt="Logo"
+                        className="w-10"
+                    />
+                </a>
+
+                {/* DESKTOP MENU */}
+                <div className="hidden items-center gap-8 text-sm md:flex">
+                    {navItems.map((item) => (
+                        <a
+                            key={item.label}
+                            href={item.href}
+                            className="relative text-gray-200 transition after:absolute after:-bottom-1 after:left-0 after:h-[1px] after:w-0 after:bg-white after:transition-all hover:text-white hover:after:w-full"
+                        >
+                            {item.label}
+                        </a>
+                    ))}
                 </div>
 
-                {/*Bar Desktop Mode */}
-                <div className="hidden md:block lg:block">
-                    {/* <Button variant={'outline'} className='text-black' disabled>
-                        Become a member
-                    </Button> */}
-                    <a
-                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                        href="#about"
-                    >
-                        About
-                    </a>
-                    <a
-                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                        href="#projects"
-                    >
-                        Projects
-                    </a>
-                    <a
-                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                        href="#skills"
-                    >
-                        Skills
-                    </a>
-                    <a
-                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                        href="#experiences"
-                    >
-                        Experience
-                    </a>
-                    <a
-                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                        href="#contact"
-                    >
-                        Contact
-                    </a>
-                </div>
-                {/* Bar Mobile Mode */}
+                {/* MOBILE BUTTON */}
                 <button
-                    className="rounded-md border p-2 md:hidden"
+                    className="rounded-lg border border-white/20 bg-white/10 p-2 text-white backdrop-blur-md md:hidden"
                     onClick={() => setOpen(!open)}
                 >
-                    <div
-                        className={`transition-transform duration-300 ${open ? 'rotate-180' : 'rotate-0'} `}
-                    >
-                        <PanelTopOpen />
-                    </div>
+                    {open ? <X size={20} /> : <Menu size={20} />}
                 </button>
-                {/* Mobile Menu */}
-                {open && (
-                    <div className="absolute top-16 right-[40px] z-50 flex w-[305px] flex-row gap-1 rounded-md bg-black p-2 shadow-xs shadow-white lg:hidden">
-                        <div className="flex flex-col">
-                            <a
-                                onClick={() => setOpen(!open)}
-                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                                href="#about"
-                            >
-                                About
-                            </a>
-                            <a
-                                onClick={() => setOpen(!open)}
-                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                                href="#projects"
-                            >
-                                Project
-                            </a>
-                            {/* <Button variant={'outline'}>Login</Button> */}
-                        </div>
-                        <div className="flex flex-col">
-                            <a
-                                onClick={() => setOpen(!open)}
-                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                                href="#skills"
-                            >
-                                Skills
-                            </a>
-                            <a
-                                onClick={() => setOpen(!open)}
-                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                                href="#experiences"
-                            >
-                                Experience
-                            </a>
-                        </div>
-                        <div className="flex flex-col">
-                            <a
-                                onClick={() => setOpen(!open)}
-                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                                href="#contact"
-                            >
-                                Contact
-                            </a>
-                            <a
-                                onClick={() => setOpen(!open)}
-                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
-                                href="#about"
-                            ></a>
-                        </div>
-                    </div>
-                )}
             </div>
+
+            {/* MOBILE MENU */}
+            {open && (
+                <div  className="
+            md:hidden
+            mx-auto mt-3 max-w-7xl
+            rounded-2xl
+            border border-white/10
+            bg-white/10
+            backdrop-blur-xl
+            shadow-[0_10px_30px_rgba(0,0,0,0.35)]
+        ">
+                    <div className="flex flex-col gap-4 px-6 py-6">
+                        {navItems.map((item) => (
+                            <a
+                                key={item.label}
+                                href={item.href}
+                                onClick={() => setOpen(false)}
+                                className="text-base text-gray-200 transition hover:text-white"
+                            >
+                                {item.label}
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            )}
         </nav>
     );
 }
