@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -12,7 +12,10 @@
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
-    --font-abril:'Abril Fatface', display;
+    --font-almendra: 'Almendra SC', serif;
+    --font-abril: 'Abril Fatface', display;
+    --font-aboreto: 'Aboreto', display;
+    --font-abel: 'Abel', sans-serif;
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
@@ -135,9 +138,31 @@
 @layer base {
     * {
         @apply border-border;
+        scroll-behavior: smooth;
     }
 
     body {
         @apply bg-background text-foreground;
     }
+
 }
+@keyframes float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+  }
+  50% {
+    transform: translateY(-50px) translateX(20px);
+  }
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+}
+
+.animate-float {
+  animation: float 12s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 16s ease-in-out infinite reverse;
+}
+

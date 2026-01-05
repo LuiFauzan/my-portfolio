@@ -1,22 +1,57 @@
-import { Button } from '@/components/ui/button';
-import { PanelBottomOpen, PanelTopOpen } from 'lucide-react';
+import { PanelTopOpen } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
     return (
-        <nav className="rounded-md p-2 fixed w-[372px]">
-            <div className="flex items-center justify-between">
-                <div>
-                    <img
-                        src="assets/img/lf-logo-putih.svg"
-                        className={`transition-transform duration-300 w-[40px] ${open ? 'rotate-90' : 'rotate-0'}`}
-                        alt=""
-                    />
+        <nav className="fixed z-50 w-full rounded-md p-2 px-10 pt-4 md:px-39 md:pt-5 lg:w-full lg:px-64 lg:pt-7">
+            <div className="flex items-center justify-between lg:py-2">
+                <div className="">
+                    <a href="#">
+                        <img
+                            src="assets/img/lf-logo-putih.svg"
+                            className={`w-[40px] transition-transform duration-300 ${open ? 'rotate-90' : 'rotate-0'}`}
+                            alt=""
+                        />
+                    </a>
                 </div>
 
                 {/*Bar Desktop Mode */}
-                <div className="hidden lg:block"></div>
+                <div className="hidden md:block lg:block">
+                    {/* <Button variant={'outline'} className='text-black' disabled>
+                        Become a member
+                    </Button> */}
+                    <a
+                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                        href="#about"
+                    >
+                        About
+                    </a>
+                    <a
+                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                        href="#projects"
+                    >
+                        Projects
+                    </a>
+                    <a
+                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                        href="#skills"
+                    >
+                        Skills
+                    </a>
+                    <a
+                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                        href="#experiences"
+                    >
+                        Experience
+                    </a>
+                    <a
+                        className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                        href="#contact"
+                    >
+                        Contact
+                    </a>
+                </div>
                 {/* Bar Mobile Mode */}
                 <button
                     className="rounded-md border p-2 md:hidden"
@@ -30,21 +65,54 @@ export default function Navbar() {
                 </button>
                 {/* Mobile Menu */}
                 {open && (
-                    <div className="absolute bg-black shadow-white top-14 right-[6.5 px] flex w-[359px] flex-row p-2 gap-1 rounded-md shadow-xs lg:hidden z-50">
-                        <div className='flex flex-col'>
-                            <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">About</a>
-                            <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">Project</a>
+                    <div className="absolute top-16 right-[40px] z-50 flex w-[305px] flex-row gap-1 rounded-md bg-black p-2 shadow-xs shadow-white lg:hidden">
+                        <div className="flex flex-col">
+                            <a
+                                onClick={() => setOpen(!open)}
+                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                                href="#about"
+                            >
+                                About
+                            </a>
+                            <a
+                                onClick={() => setOpen(!open)}
+                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                                href="#projects"
+                            >
+                                Project
+                            </a>
                             {/* <Button variant={'outline'}>Login</Button> */}
                         </div>
-                        <div className='flex flex-col'>
-                            <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">Skills</a>
-                            <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">Experience</a>
+                        <div className="flex flex-col">
+                            <a
+                                onClick={() => setOpen(!open)}
+                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                                href="#skills"
+                            >
+                                Skills
+                            </a>
+                            <a
+                                onClick={() => setOpen(!open)}
+                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                                href="#experiences"
+                            >
+                                Experience
+                            </a>
                         </div>
-                        <div className='flex flex-col'>
-                            <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about">Contact</a>
-                            <a onClick={() => setOpen(!open)} className='p-2 transition-all duration-300 hover:bg-white hover:text-black hover:scale-125 rounded-md  w-fit ' href="#about"></a>
+                        <div className="flex flex-col">
+                            <a
+                                onClick={() => setOpen(!open)}
+                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                                href="#contact"
+                            >
+                                Contact
+                            </a>
+                            <a
+                                onClick={() => setOpen(!open)}
+                                className="w-fit rounded-md p-2 transition-all duration-300 hover:scale-125 hover:bg-white hover:text-black"
+                                href="#about"
+                            ></a>
                         </div>
-
                     </div>
                 )}
             </div>
